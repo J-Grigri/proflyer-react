@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function LoginPage(props) {
 
@@ -31,7 +31,7 @@ export default function LoginPage(props) {
         if (res.status === 200 || 201) {
             const data = await res.json()
             localStorage.setItem("token", data.data.token)
-            props.setUser(data.data.user)
+            await props.setUser(data.data.user)
 
         } else {
             return alert("Login not successful")
@@ -74,6 +74,9 @@ export default function LoginPage(props) {
             <p className="my-1">
                 Don't have an account? <Link to="/register">Sign Up</Link>
             </p>
+            <p className="my-1">
+                Forgot your password? <Link to="login/forgot-password">Reset password</Link>
+            </p>
             <ul>
                 <li>
                     <a href="https://localhost:5000/auth/facebook">
@@ -85,6 +88,7 @@ export default function LoginPage(props) {
                 </li>
             </ul>
         </section>
+
     )
 }
 

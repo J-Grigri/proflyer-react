@@ -1,0 +1,85 @@
+.menuBtn {
+  background-color: transparent;
+  color: #b89517;
+  font-weight: 500;
+  font-size: larger;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  border: none;
+}
+.menuBtn :active {
+  background-color: maroon;
+}
+.menuBtn:hover {
+  columns: #f4f4f4;
+}
+.medium {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  color: blueviolet;
+  font-weight: 600;
+  font-size: x-large;
+}
+.containerProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.updateContainer {
+  background-color: rgba(0, 0, 0, 0.75);
+  /* min-height: 10rem; */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 10px;
+  border: 2px solid #b89517;
+  padding: 0;
+}
+.menuRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.updateSection {
+  background-color: grey;
+}
+.psw {
+  border: 1px solid #ffffff;
+}
+.generalCon {
+}
+.generalSec {
+  display: flex;
+  flex-direction: column;
+}
+.fields {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+.inputBox {
+  outline: none;
+}
+
+.inputLabel {
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  margin-bottom: 0;
+  margin-right: 1rem;
+}
+.col {
+  padding: 0;
+}
+
+.socrow {
+  display: flex;
+  margin-top: 1rem;
+}

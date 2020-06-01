@@ -1,42 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom'
-import './App.css';
+import {
+  CircleLoader
+} from 'react-spinners'
+import './App.css'
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 import Landing from "./components/landing"
 import Protected from "./components/Protected"
 import Nomore from "./components/Nomore"
 import MainPage from "./views/MainPage"
-import LoginPage from "./views/LoginPage"
-import Coaches from "./views/Coaches"
-import Camps from "./views/camps"
-import Profile from "./views/profile"
-import RegisterPage from './views/RegisterPage';
+import EntryPage from "./views/EntryPage"
+import CoachCard from "./components/CoachCard"
+import Camp from "./views/Camp"
+import Profile from "./views/Profile"
+import ChangePassword from './views/changePassword';
 
-function App() {
+
+function App(props) {
   let [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false)
+  const [formInput, setFormInput] = useState({ ...props })
+
+  console.log("crazy props", props)
+  console.log("AL THERE IS", user)
 
   useEffect(() => {
     checkUser();
+    navbarChange()
   }, [])
 
+  function navbarChange() {
+    window.addEventListener("scroll", function (event) {
+      let y = window.pageYOffset
+      console.log("scrolling", y)
+      if (y > 10) {
+        document.getElementById("mynav") && document.getElementById("mynav").classList.add('active')
+      } else {
+        document.getElementById("mynav") && document.getElementById("mynav").classList.remove('active')
+      }
+    }, false)
+  }
+
   const checkUser = async () => {
-    // extracting token from url
     console.log(window.location.href)
 
     const urlToken = window.location.href.split("?token=")[1]
       ? window.location.href.split("?token=")[1].split("#")[0]
       : null;
-    // get token from storage or urlToken
     const token = localStorage.getItem("token") || urlToken;
 
-    // if there is no token, we don't need to do anything else, just set our app state as LOADED
     if (!token) {
       setLoaded(true);
       return;
     }
 
-    // if there is token, we will fetch user information from api server using the token.
+    // fetch API if token awailable
     try {
       const url = "https://localhost:5000/users/me";
       const resp = await fetch(url, {
@@ -46,37 +65,47 @@ function App() {
       });
 
       const data = await resp.json();
-      // if we get user object from response, it means token is correct, we save it back to storage
       if (data.status === "Success") {
         localStorage.setItem("token", token);
         setUser(data.data);
       } else {
-        // remove invalid tokens
         localStorage.removeItem("token");
       }
     } catch (err) {
       console.log(err);
     }
-    // finally set our app state to LOADED
+    // set state to LOADED
     setLoaded(true);
   };
-  if (!loaded) return <h3>app is loading</h3>
+  if (!loaded) return (
+    <>
+      <CircleLoader />
+    </>
+  )
+
   return (
     <div>
-      <Header user={user} setUser={setUser} />
-      <Route exact path="/" render={() => <Landing user={user}></Landing>} />
+      <Header user={user} setUser={setUser} formInput={formInput} setFormInput={setFormInput} />
 
-      <section className="container">
-        <Switch>
-          <Route exact path="/main" render={() => <MainPage user={user} />} />
-          <Route exact path="/coaches" component={Coaches} />
-          <Protected exact path="/camps/:id" user={user} component={Camps} />
-          <Route exact path="/camps" component={Camps} />
-          <Nomore exact path="/register" user={user} component={RegisterPage} />
-          <Nomore exact path="/login" user={user} setUser={setUser} component={LoginPage} />
-          <Protected exact path="/profile" setUser={setUser} user={user} component={Profile} />
-        </Switch>
-      </section>
+      <div className="mainSection">
+        <section className="container ksection">
+          <Switch>
+            <div className="jsection">
+              <Route exact path="/" render={() => <Landing user={user}></Landing>} />
+              <Route exact path="/main" render={() => <MainPage user={user} />} />
+              <Protected exact path="/coaches" user={user} setUser={setUser} component={CoachCard} />
+              {/* <Protected exact path="/camps/:id" user={user} component={Camps} /> */}
+              <Protected exact path="/camps/create" user={user} setUser={setUser} component={Camp} />
+              <Nomore exact path="/register" user={user} setUser={setUser} page="register" component={EntryPage} />
+              <Nomore exact path="/email/:urlToken" user={user} component={ChangePassword} />
+              <Nomore exact path="/login" setUser={setUser} user={user} page="login" component={EntryPage} />
+              <Protected exact path="/profile" setUser={setUser} user={user} component={Profile} />
+            </div>
+          </Switch>
+        </section>
+
+        <Footer />
+      </div>
     </div>
   );
 }

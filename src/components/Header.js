@@ -1,11 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
+import "../navbar.css"
 
 export default function Header(props) {
     const history = useHistory();
 
-    console.log(props.user)
+    // const $ = document.getElementsByClassName
+
+
+    console.log("props.user in Header", props.user)
 
     const handleLogout = async () => {
 
@@ -27,27 +31,52 @@ export default function Header(props) {
     };
 
     return (
-        <div>
-            <nav className="navbar bg-dark">
-                <h1>
-                    <Link to="/"><i class="fas fa-jedi"></i> ProFlyer</Link>
-                </h1>
-                <ul>
-                    <li><Link to="/coaches">Coaches</Link></li>
-                    <li><Link to="/camps">Camps</Link></li>
+        <div className="kheader">
+            <header>
+                <div id="mynav" className="navbar navbar-expand-lg fixed-top ">
+                    <nav className="topRow">
+                        <Link to="/" className="navbar-brand  font-weight-bold"><i className="fas fa-jedi"></i>ProFlyer</Link>
+                        <button
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                            className="navbar-toggler navbar-toggler-right"
+                        >
+                            <i class="fa fa-bars"></i>
+                        </button>
 
-                    <li> {!props.user ?
-                        <Link to="/register">Register</Link>
-                        :
-                        <Link to="/profile">{props.user.name}</Link>}
-                    </li>
+                        <div id="navbarSupportedContent" className="collapse navbar-collapse">
+                            <ul className="navbar-nav ml-auto">
+                                <li class="nav-item"> {!props.user ?
+                                    <Link to="/" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>Home</Link>
+                                    :
+                                    <Link to="/main" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>Home</Link>}
+                                </li>
 
-                    <li> {!props.user ?
-                        <Link to="/login">Login</Link>
-                        :
-                        <Link onClick={handleLogout} >Logout</Link>}</li>
-                </ul>
-            </nav>
+                                <li class="nav-item"><Link to="/coaches" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}> Coaches</Link></li>
+
+                                <li class="nav-item"><Link to="/camps/create" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Create camp</Link></li>
+                                <li class="nav-item"> {!props.user ?
+                                    <Link to="/register" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Register</Link>
+                                    :
+                                    <Link to="/profile" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>{props.user.name}</Link>}
+                                </li>
+                                <li class="nav-item">
+                                    {!props.user ?
+                                        <Link to="/login" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Login</Link>
+                                        :
+                                        <Link onClick={handleLogout} class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Logout</Link>}
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </nav>
+                </div>
+            </header>
         </div>
     )
 }

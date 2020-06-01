@@ -1,0 +1,49 @@
+#Camps {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+label {
+  color: #f4f4f4;
+  font-weight: 700;
+}
+.ca mpContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.campForm {
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 10px 10px;
+  border: 2px solid #b89517;
+}
+.form {
+  margin: 0.5rem;
+}
+
+.buttonsRow {
+  display: flex;
+  flex-direction: row;
+  height: 3rem;
+}
+.date {
+  display: flex;
+  flex-direction: row;
+}
+.participants {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.pFielfds {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.campBtn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}

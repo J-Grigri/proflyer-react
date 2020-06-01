@@ -1,0 +1,37 @@
+#footer {
+  background: #17a2b8;
+  color: black;
+  border-top: 1px solid #343a40;
+  bottom: 0;
+}
+
+.container {
+  padding-top: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+h5 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+}
+
+a {
+  color: #343a40;
+  font-size: 0.85rem;
+}
+
+i {
+  padding-right: 1rem;
+}
+.footerIcons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  color: green;
+}
+.cc {
+  background-color: #343a40;
+  color: #17a2b8;
+  height: 1.5rem;
+}
