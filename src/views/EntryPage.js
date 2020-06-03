@@ -35,8 +35,11 @@ export default function EntryPage(props) {
             },
             body: JSON.stringify({ email, password })
         });
+
         if (res.status === 200 || 201) {
             const data = await res.json()
+            console.log("=-=-=-=-=", data)
+
             localStorage.setItem("token", data.data.token)
             await props.setUser(data.data.user)
 
@@ -59,10 +62,10 @@ export default function EntryPage(props) {
                 },
                 body: JSON.stringify(formInput)
             });
-            if (res.status === 201) {
+            if (res.status === 200 || 201) {
                 const data = await res.json()
-                localStorage.setItem("token", data.data.token)
 
+                localStorage.setItem("token", data.data.token)
                 props.setUser(data.data.user)
 
 
@@ -88,25 +91,26 @@ export default function EntryPage(props) {
     }
 
     const loginFields = [{
-        text: "Email",
         type: "email",
         name: "email",
+        placeholder: "Email",
+        text: "email",
         icon: "envelope",
-        placeholder: "Email"
     },
     {
-        text: "Password",
         type: "password",
         name: "password",
+        placeholder: "Password",
+        text: "password",
         icon: "key",
-        placeholder: "Password"
     },]
 
     const registerFields = [{
-        text: "Full name",
-        placeholder: "Full name",
         type: "text",
         name: "name",
+        placeholder: "Full name",
+        text: "Password",
+
         icon: "user"
     },
     {

@@ -18,7 +18,7 @@
   min-height: 100vh;
 }
 
-.ksection {
+.footerPos {
   flex: 1 0 auto;
 }
 
@@ -56,10 +56,10 @@ img {
 
 /* Utilities */
 .container {
-  max-width: 90vh;
+  max-width: 100vh;
   margin: 0 auto;
   /* overflow: hidden; */
-  padding: 30px 20px;
+  /* padding: 30px 20px; */
   /* margin-bottom: 3rem; */
   /* overflow: visible; */
   /* min-height: calc(100vh -100px -250px); */

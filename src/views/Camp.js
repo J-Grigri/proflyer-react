@@ -1,116 +1,68 @@
 import React, { useState } from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 import { Tabs } from "@yazanaabed/react-tabs";
-import "../entryPage.css"
+import "../entryPage.css";
+import { useHistory } from "react-router-dom";
+
 require("dotenv").config({ path: "../env" });
 
 export default function Camp(props) {
+    const history = useHistory();
 
+    let body
+    let campsList = [];
     const [formInput, setFormInput] = useState()
     const [formState, setFormState] = useState("")
 
+    const [skydiveForm, setSkydiveForm] = useState()
+    const [tunnelForm, setTunnelForm] = useState()
+
     const handleChange = e => {
-        setFormInput({
-            ...formInput, [e.target.name]: e.target.value
-        })
+
+        if (formState === "skydiveCamp") {
+            setSkydiveForm({
+                ...skydiveForm, [e.target.name]: e.target.value
+            })
+        }
+        else if (formState === "tunnelCamp") {
+            setTunnelForm({
+                ...tunnelForm, [e.target.name]: e.target.value
+            })
+        }
     }
 
     async function createCamp(e) {
         e.preventDefault()
-        const res = fetch("https://localhost:5000/camps/organize", {
+
+        if (formState === "skydiveCamp") {
+            body = skydiveForm
+            console.log("bodiiiiii", body)
+        }
+        else if (formState === "tunnelCamp") {
+            body = tunnelForm
+            console.log("bodiiiiii", body)
+        }
+
+
+        const res = await fetch("https://localhost:5000/camps/organize", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(formInput)
+            body: JSON.stringify(body)
         })
-
+        console.log("status", res.status)
         if (res.status === 201) {
-            const data = await res.json()
-            props.setUser(data.data)
+            history.push("/camps")
         }
         else {
             return alert("Could not create camp")
         }
     }
+
+
     console.log("form input", formInput)
-
-    //Skydive camp fields
-    // const skydiveFields = [{
-    //     text: "Location (tunnel name)",
-    //     className: "mt-5",
-    //     type: "text",
-    //     name: "venue"
-    // },
-    // {
-    //     text: "Start date",
-    //     type: "date",
-    //     name: "startDate"
-    // },
-    // {
-    //     text: "End date",
-    //     type: "date",
-    //     name: "endDate"
-    // },
-    // {
-    //     text: "Group size (max)",
-    //     type: "number",
-    //     name: "groupSize"
-    // },
-    // {
-    //     text: "Price per person",
-    //     type: "number",
-    //     name: "price"
-    // },
-    // {
-    //     text: "Title",
-    //     type: "text",
-    //     name: "title"
-    // },
-    // {
-    //     text: "Description",
-    //     type: "text",
-    //     name: "description"
-    // }];
-
-    //Wind tunnel camp fields
-    // const tunnelFields = [{
-    //     text: "Location (tunnel name)",
-    //     className: "mt-5",
-    //     type: "text",
-    //     name: "venue"
-    // },
-    // {
-    //     text: "Start date",
-    //     type: "date",
-    //     name: "startDate"
-    // },
-    // {
-    //     text: "End date",
-    //     type: "date",
-    //     name: "endDate"
-    // },
-    // {
-    //     text: "Group size (max)",
-    //     type: "number",
-    //     name: "groupSize"
-    // },
-    // {
-    //     text: "Price per person",
-    //     type: "number",
-    //     name: "price"
-    // },
-    // {
-    //     text: "Title",
-    //     type: "text",
-    //     name: "title"
-    // },
-    // {
-    //     text: "Description",
-    //     type: "number",
-    //     name: "description"
-    // }];
 
     const renderForm = (state) => {
 
@@ -188,7 +140,7 @@ export default function Camp(props) {
 
     return (
         <div id="Camps">
-            <div className="campContainer col col-xl-12">
+            <div className="campContainer col col-xl-12" style={{ textAlign: "center" }}>
                 <h2>Create a new camp</h2>
                 <ButtonGroup className="mb-2">
                     <Button onClick={() => setFormState("skydiveCamp")} >Skydive</Button>

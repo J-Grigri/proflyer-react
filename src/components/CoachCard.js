@@ -7,9 +7,6 @@ export default function Coaches(props) {
 
     let [user, setUser] = useState({ ...props.user });
 
-    console.log("here props.user.coach", props.user.coach)
-    console.log("here props.user", props.user)
-
     return (
         <div className="coachCardBase" style={{ width: "18rem" }}>
             <img src="https://a.calameoassets.com/1651941/picture.jpg?_u=120908181623" className="card-img-top" alt="..." />
@@ -23,7 +20,7 @@ export default function Coaches(props) {
                 <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
             </div>
             <div className="list-group list-group-flush">
-                <div className="coachDisc">{props.user.coach.disciplines}</div>
+                <div className="coachDisc">Disciplines</div>
                 <div className="coachRating">Coach rating:</div>
             </div>
             <div className="card-link">

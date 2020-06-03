@@ -14,14 +14,7 @@
 .menuBtn:hover {
   columns: #f4f4f4;
 }
-.medium {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  color: blueviolet;
-  font-weight: 600;
-  font-size: x-large;
-}
+
 .containerProfile {
   display: flex;
   flex-direction: column;

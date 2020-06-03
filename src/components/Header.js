@@ -6,9 +6,6 @@ import "../navbar.css"
 export default function Header(props) {
     const history = useHistory();
 
-    // const $ = document.getElementsByClassName
-
-
     console.log("props.user in Header", props.user)
 
     const handleLogout = async () => {
@@ -49,7 +46,15 @@ export default function Header(props) {
                         </button>
 
                         <div id="navbarSupportedContent" className="collapse navbar-collapse">
-                            <ul className="navbar-nav ml-auto">
+                            <ul
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                                className="navbar-nav ml-auto">
+
                                 <li class="nav-item"> {!props.user ?
                                     <Link to="/" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>Home</Link>
                                     :
@@ -58,7 +63,14 @@ export default function Header(props) {
 
                                 <li class="nav-item"><Link to="/coaches" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}> Coaches</Link></li>
 
-                                <li class="nav-item"><Link to="/camps/create" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Create camp</Link></li>
+                                <li class="nav-item"><Link to="/camps" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Camps</Link></li>
+
+                                <li class="nav-item"> {!props.user ?
+                                    <span></span>
+                                    :
+                                    <Link to="/camps/create" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>Organize</Link>}
+                                </li>
+
                                 <li class="nav-item"> {!props.user ?
                                     <Link to="/register" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Register</Link>
                                     :

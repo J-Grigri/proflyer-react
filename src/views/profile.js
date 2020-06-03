@@ -1,21 +1,44 @@
 import React, { useState } from 'react'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Button, ButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap'
 require("dotenv").config({ path: "../env" });
 
 export default function Profile(props) {
+    let body;
 
-    const [formInput, setFormInput] = useState({ ...props.user })
+    const [generalForm, setGeneralForm] = useState({})
+    const [coachForm, setCoachForm] = useState({})
+    const [socialForm, setSocialForm] = useState({})
+    const [pwForm, setPwForm] = useState({})
     const [formState, setFormState] = useState("general")
 
+    // Each tab is handled in a seperate form
     const handleChange = e => {
-        setFormInput({
-            ...formInput, [e.target.name]: e.target.value
-        })
+
+        if (formState === "general") {
+            setGeneralForm({
+                ...generalForm, [e.target.name]: e.target.value
+            })
+        }
+        else if (formState === "coach") {
+            setCoachForm({
+                ...coachForm, [e.target.name]: e.target.value
+            })
+        }
+        else if (formState === "socMedia") {
+            setSocialForm({
+                ...socialForm, [e.target.name]: e.target.value
+            })
+        }
+        else if (formState === "password") {
+            setPwForm({
+                ...pwForm, [e.target.name]: e.target.value
+            })
+        }
     }
 
     async function updatePW(e) {
         e.preventDefault()
-        const { passwordCurrent, password1, password2 } = formInput;
+        const { passwordCurrent, password1, password2 } = pwForm;
         if (password1 !== password2) {
             alert("Passwords do not match")
         }
@@ -41,176 +64,231 @@ export default function Profile(props) {
     async function updateProfile(e) {
         e.preventDefault()
 
+        if (formState === "general") {
+            body = generalForm
+        }
+        else if (formState === "coach") {
+            body = coachForm
+        }
+        else if (formState === "socMedia") {
+            body = socialForm
+        }
+        console.log("bodiiiiii", body)
+
         const res = await fetch("https://localhost:5000/users/me", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(formInput)
+            body: JSON.stringify(body)
         });
         if (res.status === 200) {
             const data = await res.json()
             // localStorage.setItem("token", data.data.token)
             props.setUser(data.data)
-            console.log(data.data);
             console.log("Updated successfully")
 
         } else {
             return alert("Profile update failed")
         }
     }
-    //RESET PASSWORD SECTION
-    // const passwordFields = [{
-    //     text: "Current password",
-    //     type: "password",
-    //     name: "passwordCurrent",
-    //     icon: "envelope"
-    // },
-    // {
-    //     text: "New password",
-    //     type: "password",
-    //     name: "password1",
-    //     icon: "envelope"
-    // },
-    // {
-    //     text: "Repeat new password",
-    //     type: "password",
-    //     name: "password2",
-    //     icon: "envelope"
-    // }];
-    // //GENERAL PROFILE SECTION
-    // const profileFields = [{
-    //     text: "Full Name",
-    //     className: "mt-5",
-    //     type: "text",
-    //     name: "name",
-    //     value: formInput.name,
-    //     placeholder: "name"
-    // },
-    // {
-    //     text: "Upload your picture",
-    //     type: "image",
-    //     name: "profile.avatar",
-    //     value: formInput["profile.avatar"]
-    // },
-    // {
-    //     text: "Enable your location",
-    //     type: "text",
-    //     name: "profile.location",
-    //     value: formInput["profile.location"],
-    //     placeholder: "Location"
-    // },
-    // {
-    //     text: "Mark all disciplines you practice",
-    //     type: "checkbox",
-    //     name: "profile.disciplines",
-    //     value: formInput["profile.disciplines"],
-    //     placeholder: "Disciplines"
-    // },
-    // {
-    //     text: "Skydive licence",
-    //     type: "dropdown",
-    //     name: "profile.skydiveLicence",
-    //     value: formInput["profile.skydiveLicence"],
-    //     placeholder: "Select"
-    // },
-    // {
-    //     text: "Estimated flying hours in a wind tunnel",
-    //     type: "text",
-    //     name: "profile.tunnelHours",
-    //     value: formInput["profile.tunnelHours"]
-    // },
-    // {
-    //     text: "Paste a url to your youtube account",
-    //     type: "url",
-    //     name: "profile.social.youtube",
-    //     value: formInput["profile.social.youtube"]
-    // },
-    // {
-    //     text: "Paste a url to your instagram account",
-    //     type: "url",
-    //     name: "profile.social.instagram",
-    //     value: formInput["profile.social.instagram"]
-    // },
-    // {
-    //     text: "Paste a url to your facebook account",
-    //     type: "url",
-    //     name: "profile.social.facebook",
-    //     value: formInput["profile.social.facebook"]
-    // },
-    // {
-    //     text: "Paste a url to twitter account",
-    //     type: "url",
-    //     name: "profile.social.twitter",
-    //     value: formInput["profile.social.twitter"]
-    // },
-    // ];
-    //COACH PROFILE SECTION
-    // const coachFields = [{
-    //     text: "Your introduction or shot bio",
-    //     type: "text",
-    //     name: "coach.bio",
-    //     value: formInput["coach.bio"]
-    // }, {
-    //     text: "Year that you started your coaching career?",
-    //     type: "date",
-    //     name: "coach.inSportSince",
-    //     value: formInput["coach.inSportSince"]
-    // }, {
-    //     text: "What relevant certifications have you obtained?",
-    //     type: "text",
-    //     name: "coach.certifications",
-    //     value: formInput["coach.certifications"]
-    // }, {
-    //     text: "What relevant achievments would you like to share?",
-    //     type: "text",
-    //     name: "coach.achievments",
-    //     value: formInput["coach.achievments"]
-    // }, {
-    //     text: "What relevant work experience would you like to share?",
-    //     type: "text",
-    //     name: "coach.experience",
-    //     value: formInput["coach.experience"]
-    // }, {
-    //     text: "What disciplines are you qualified to coach?",
-    //     type: "text",
-    //     name: "coach.disciplines",
-    //     value: formInput["coach.disciplines"]
-    // },];
 
-    console.log(formInput)
-    console.log("this", props.user)
+    // Imgur file upload
+    async function uploadFile(e) {
+        e.preventDefault();
+        // const selectedFile = document.getElementById('upload_form').files[0]
+        // let formdata = new FormData();
+        // formdata.append("image", selectedFile);
+        // const res = await fetch("https://api.imgur.com/3/image", {
+        //     method: "POST",
+        //     headers: {
+        //         Authorization: `Client-ID ` + process.env.IMGUR_CLIENT_ID
+        //     },
+        //     body: formdata
+        // });
+
+        // if (res.ok) {
+        //     const data = await res.json();
+        //     console.log(data)
+        //     if (data.success) {
+        //         console.log("File uploaded")
+        //     }
+        //     else {
+        //         console.log("cannot upload because of", data.message)
+        //     }
+        // } else {
+        //     alert("cannot upload")
+        // }
+    }
+
 
     const renderForm = (state) => {
+        //RENDER GENERAL SECTION OF THE USER PROFILE
+        if (state === "general") {
+            return (
+                <div className="generalCon mt-3">
+                    <form onChange={handleChange} onSubmit={updateProfile} className="generalSec">
+                        <div className="fields">
+                            <label for="name" className="inputLabel col col-sm-5">Full name:</label>
+                            <input
+                                className="inputBox col col-sm-3"
+                                text="Full Name"
+                                type="text"
+                                name="name"
+                                value={generalForm.name || props.user.name}
+                            />
+                        </div>
+                        <div className="fields">
+                            <label for="image" className="inputLabel col col-sm-5">Upload profile image</label>
+                            <input
+                                className="inputBox col col-sm-4"
+                                accept="image/png, image/jpeg"
+                                type="image"
+                                id="upload_form"
+                                alt="profile image"
+                                name="profile.avatar"
+                            // value={generalForm["profile.avatar"] || props.user.profile.avatar}
+                            />
 
+                        </div>
+                        <div className="fields">
+                            <label for="Location" className="inputLabel col col-sm-5">Your location</label>
+                            <input
+                                className="inputBox col col-sm-3"
+                                text="Enable your location"
+                                type="text"
+                                name="profile.location"
+                                value={generalForm["profile.location"] || props.user.profile.location}
+                                placeholder="Location"
+                            />
+                        </div>
+
+                        <div className="fields" style={{ justifyContent: "center" }}>
+                            <button type="button" className="btn btn-info dropdown-toggle col col-sm-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="profile.skydiveLicence" >{generalForm["profile.skydiveLicence"] || props.user.profile.skydiveLicence}</button>
+                            {/* value={props.user.skydiveLicence} */}
+                            <div className="dropdown-menu">
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.skydiveLicence"] = "A"
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >A</p>
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.skydiveLicence"] = "B"
+                                    setGeneralForm({
+                                        ...generalForm,
+                                    })
+                                }}
+                                >B</p>
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.skydiveLicence"] = "C"
+
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >C</p>
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.skydiveLicence"] = "D"
+
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >D</p>
+                                <div className="dropdown-divider"></div>
+                                <div className="dropdown-item" onClick={() => {
+                                    generalForm["profile.skydiveLicence"] = "No licence"
+
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >No Licence</div>
+                            </div>
+                        </div>
+
+                        <div className="fields" style={{ justifyContent: "center" }}>
+                            <button type="button" className="btn btn-info dropdown-toggle col col-sm-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{generalForm["profile.tunnelHours"] || props.user.profile.tunnelHours}</button>
+                            <div className="dropdown-menu">
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.tunnelHours"] = "1 - 10 hours"
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >1 - 10 hours</p>
+
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.tunnelHours"] = "10 - 50 hours"
+                                    setGeneralForm({
+                                        ...generalForm,
+                                    })
+                                }}
+                                >10 - 50 hours</p>
+
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.tunnelHours"] = "50 - 100 hours"
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >50 - 100 hours</p>
+
+                                <p className="dropdown-item" onClick={() => {
+                                    generalForm["profile.tunnelHours"] = "100+ hours"
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >100+ hours</p>
+
+                                <div className="dropdown-divider"></div>
+                                <div className="dropdown-item" onClick={() => {
+                                    generalForm["profile.tunnelHours"] = "No experience"
+                                    setGeneralForm({
+                                        ...generalForm
+                                    })
+                                }}
+                                >No experience</div>
+                            </div>
+                        </div>
+                        <div className="campBtn">
+                            <button type="submit" className="btn btn-danger mt-5 "> Reset fields</button>
+                            <button type="submit" className="btn btn-primary mt-5" style={{ marginLeft: "1rem" }}>Updateee</button>
+                        </div>
+
+                    </form>
+                </div>
+            )
+        }
 
 
         //RENDER COACH SECTION OF THE USER PROFILE
-        if (state === "coach") {
+        else if (state === "coach") {
             return (
                 <div className="generalCon mt-3">
-                    <form className="generalSec">
+                    <form onChange={handleChange} onSubmit={updateProfile} className="generalSec">
                         <div className="fields">
-                            <label for="Coach bio" className="inputLabel col col-sm-4" >Introduction</label>
+                            <label for="Coach bio" className="inputLabel col col-sm-4">Introduction</label>
                             <textarea
                                 className="inputBox col col-sm-4"
-                                text="Coach bio"
                                 type="text"
-                                rows="3"
-                                value=""
-                                // name="coach.inSportSince"
                                 placeholder="Coach bio"
+                                rows="3"
+                                name="coach.bio"
+                                value={coachForm["coach.bio"] || props.user.coach.bio}
                             />
                         </div>
                         <div className="fields">
                             <label className="inputLabel col col-sm-4" >Years in sport</label>
                             <input
                                 className="inputBox col col-sm-4"
-                                text="Year that you started your coaching career?"
                                 type="date"
-                                // name="coach.inSportSince"
-                                placeholder="Years of experience"
+                                name="coach.inSportSince"
+                                value={coachForm["coach.inSportSince"] || props.user.coach.inSportSince}
                             />
                         </div>
 
@@ -220,41 +298,39 @@ export default function Profile(props) {
                             <input
                                 className="inputBox col col-sm-4"
                                 type="text"
-                                text="What disciplines are you qualified to coach?"
-                                name="disciplines"
+                                name="coach.disciplines"
                                 placeholder="disciplines"
+                                value={coachForm["coach.disciplines"] || props.user.coach.disciplines}
                             />
                         </div>
                         <div className="fields">
                             <label className="inputLabel col col-sm-4">Relevant work experience</label>
                             <textarea
                                 className="inputBox col col-sm-4"
-                                text="What relevant work experience would you like to share?"
                                 type="text"
-                                rows="2"
-                                // name="coach.experience"
-                                placeholder="experience"
+                                placeholder="List all relevant coaching experiences"
+                                rows="3"
+                                name="coach.experience"
+                                value={coachForm["coach.experience"] || props.user.coach.experience}
                             />
                         </div>
                         <div className="fields">
                             <label className="inputLabel col col-sm-6">Certifications</label>
                             <input
                                 className="inputBox col col-sm-6"
-                                text="What relevant certifications have you obtained?"
-                                type="file"
+                                // type="file"
+                                placeholder="Attach all relevant coaching certifications"
                                 name="coach.certifications"
-                                // name="coach.experience"
-                                placeholder="certifications"
+                                value={coachForm["coach.certifications"] || props.user.coach.certifications}
                             />
                         </div>
                         <div className="fields">
                             <label className="inputLabel col col-sm-6">Extras (think of achievments or unique skills)</label>
                             <input
                                 className="inputBox col col-sm-6"
-                                text="What relevant achievments would you like to share?"
-                                type="file"
-                                // name="coach.achievments"
-                                placeholder="achievments"
+                                // type="file"
+                                name="coach.achievments"
+                                value={coachForm["coach.achievments"] || props.user.coach.achievments}
                             />
                         </div>
                         <div className="campBtn">
@@ -266,87 +342,69 @@ export default function Profile(props) {
                 </div>
             )
         }
-        //RENDER GENERAL SECTION OF THE USER PROFILE
-        else if (state === "general")
+        //RENDER COACH SECTION OF THE USER PROFILE
+        else if (state === "socMedia") {
             return (
-                <div className="generalCon mt-3">
-                    <form className="generalSec">
-                        <div className="fields">
-                            <label for="name" className="inputLabel col col-sm-5">Full name:</label>
-                            <input
-                                className="inputBox col col-sm-3"
-                                text="Full Name"
-                                // className="mt-5"
-                                type="text"
-                                name="name"
-                                value={props.user.name} />
-                        </div>
-                        <div className="fields">
-                            <label for="image" className="inputLabel col col-sm-5">Upload profile image</label>
-                            <input
-                                className="inputBox col col-sm-4"
-                                accept="image/png, image/jpeg"
-                                // style={{ display: "none" }}
-                                type="file"
-                                alt="profile image"
-                                name="profile.avatar"
-                                value={props.user.avatar}
-                            />
+                <div>
+                    <form onChange={handleChange} onSubmit={updateProfile} >
 
-                        </div>
                         <div className="fields">
-                            <label for="Location" className="inputLabel col col-sm-5">Your location</label>
+                            <label className="inputLabel col col-sm-5">Youtube:</label>
                             <input
                                 className="inputBox col col-sm-3"
-                                text="Enable your location"
-                                type="text"
-                                name="profile.location"
-                                value={props.user.location}
-                                placeholder="Location"
-                            />
-                        </div>
-                        <div className="fields" >
-                            <label for="profile.skydiveLicence" className="inputLabel col col-sm-5">Skydive licence</label>
-                            <input
-                                className="inputBox col col-sm-1"
-                                text="Skydive licence"
-                                type="dropdown"
-                                name="profile.skydiveLicence"
-                                value={props.user.skydiveLicence}
-                                placeholder="Select"
+                                type="string"
+                                name="profile.social.youtube"
+                                value={socialForm["profile.social.youtube"] || props.user.profile.social.youtube}
                             />
                         </div>
                         <div className="fields">
-                            <label for="profile.tunnelHours" className="inputLabel col col-sm-5">Estimated tunnel hours</label>
+                            <label className="inputLabel col col-sm-5">Instagram:</label>
                             <input
-                                className="inputBox col col-sm-1"
-                                text="Estimated flying hours in a wind tunnel"
-                                type="number"
-                                name="profile.tunnelHours"
-                                placehoolder="Estimate tunnel hours"
-                            // value={props.user.profile.tunnelHours}
+                                className="inputBox col col-sm-3"
+                                type="string"
+                                name="profile.social.instagram"
+                                value={socialForm["profile.social.instagram"] || props.user.profile.social.instagram}
+                            />
+                        </div>
+                        <div className="fields">
+                            <label className="inputLabel col col-sm-5">Facebook:</label>
+                            <input
+                                className="inputBox col col-sm-3"
+                                placeholder="Paste a url to your facebook account"
+                                type="string"
+                                name="profile.social.facebook"
+                                value={socialForm["profile.social.facebook"] || props.user.profile.social.facebook}
+                            />
+                        </div>
+                        <div className="fields">
+                            <label className="inputLabel col col-sm-5">Twitter:</label>
+                            <input
+                                className="inputBox col col-sm-3"
+                                placeholder="Paste twitter profile url "
+                                type="string"
+                                name="profile.social.twitter"
+                                value={socialForm["profile.social.twitter"] || props.user.profile.social.twitter}
                             />
                         </div>
                         <div className="campBtn">
-                            <button type="submit" class="btn btn-danger mt-5 "> Reset fields</button>
+                            <button type="submit" class="btn btn-danger mt-5"> Reset fields</button>
                             <button type="submit" class="btn btn-primary mt-5" style={{ marginLeft: "1rem" }}>Update</button>
                         </div>
-
                     </form>
                 </div>
-            )
 
+            )
+        }
 
         // RENDER RESET PASSWORD IN THE PROFILE SECTION
         else if (state === "password") {
             return (
                 <div>
-                    <form>
+                    <form onChange={handleChange} onSubmit={updatePW} >
                         <div className="fields">
                             <label for="passwordCurrent" className="inputLabel col col-sm-6">Current password</label>
                             <input
                                 className="inputBox col col-sm-2"
-                                text="Current password"
                                 type="password"
                                 name="passwordCurrent"
                                 icon="envelope"
@@ -356,7 +414,6 @@ export default function Profile(props) {
                             <label for="password1" className="inputLabel col col-sm-6">New password</label>
                             <input
                                 className="inputBox col col-sm-2"
-                                text="New password"
                                 type="password"
                                 name="password1"
                             />
@@ -365,7 +422,6 @@ export default function Profile(props) {
                             <label for="password2" className="inputLabel col col-sm-6">Repeat new password</label>
                             <input
                                 className="inputBox col col-sm-2"
-                                text="Repeat new password"
                                 type="password"
                                 name="password2"
                             />
@@ -378,62 +434,12 @@ export default function Profile(props) {
                 </div>
             )
         }
-        //RENDER COACH SECTION OF THE USER PROFILE
-        else if (state === "socMedia") {
-            return (
-                <div>
-                    <form>
-                        <div className="fields">
-                            <label className="inputLabel col col-sm-5">Youtube:</label>
-                            <input
-                                className="inputBox col col-sm-3"
-                                text="Paste a url to your youtube account"
-                                type="url"
-                                name="profile.social.youtube"
-                            />
-                        </div>
-                        <div className="fields">
-                            <label className="inputLabel col col-sm-5">Instagram:</label>
-                            <input
-                                className="inputBox col col-sm-3"
-                                text="Paste a url to your facebook account"
-                                type="url"
-                                name="profile.social.instagram"
-                            />
-                        </div>
-                        <div className="fields">
-                            <label className="inputLabel col col-sm-5">Facebook:</label>
-                            <input
-                                className="inputBox col col-sm-3"
-                                text="Paste a url to your facebook account"
-                                type="url"
-                                name="profile.social.facebook"
-                            />
-                        </div>
-                        <div className="fields">
-                            <label className="inputLabel col col-sm-5">Twitter:</label>
-                            <input
-                                className="inputBox col col-sm-3"
-                                text="Paste a url to your twitter account"
-                                type="url"
-                                name="profile.social.twitter"
-                            // value: formInput["profile.social.youtube"]
-                            />
-                        </div>
-                        <div className="campBtn">
-                            <button type="submit" class="btn btn-danger mt-5"> Reset fields</button>
-                            <button type="submit" class="btn btn-primary mt-5" style={{ marginLeft: "1rem" }}>Update</button>
-                        </div>
-                    </form>
-                </div>
 
-            )
-        }
     }
     //RENDER PROFILE PAGE
     return (
         <div class="containerProfile " >
-            {/* <div className="medium">Update Profile</div> */}
+            <h3>Update user profile</h3>
             <div className="updateContainer col-sm-12 col-xl-12">
                 <div className="menuRow">
                     <button onClick={() => setFormState("general")} className="menuBtn">General</button>
