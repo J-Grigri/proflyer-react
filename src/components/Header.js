@@ -11,7 +11,7 @@ export default function Header(props) {
     const handleLogout = async () => {
 
         try {
-            const req = await fetch("https://localhost:5000/auth/logout", {
+            const req = await fetch(process.env.REACT_APP_SERVER + "/auth/logout", {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }

@@ -20,10 +20,6 @@ import ChangePassword from './views/changePassword';
 import CoachFullProfile from "./components/CoachFullProfile"
 
 
-
-
-
-
 function App(props) {
   const history = useHistory()
   let [user, setUser] = useState(null);
@@ -67,7 +63,7 @@ function App(props) {
 
     // fetch API if token awailable
     try {
-      const url = "https://localhost:5000/users/me";
+      const url = process.env.REACT_APP_SERVER + "/users/me";
       const resp = await fetch(url, {
         headers: {
           Authorization: "Bearer " + token

@@ -75,7 +75,7 @@ export default function Profile(props) {
         }
         console.log("bodiiiiii", body)
 
-        const res = await fetch("https://localhost:5000/users/me", {
+        const res = await fetch(process.env.REACT_APP_SERVER + "/users/me", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

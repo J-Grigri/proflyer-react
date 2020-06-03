@@ -13,7 +13,7 @@ export default function CampCard() {
     }, [])
 
     const fetchCamps = async () => {
-        const response = await fetch("https://localhost:5000/camps/", {
+        const response = await fetch(process.env.REACT_APP_SERVER + "/camps/", {
             method: 'GET',
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")

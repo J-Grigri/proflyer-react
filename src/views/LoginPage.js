@@ -21,7 +21,7 @@ export default function LoginPage(props) {
             return alert("Please provide user email and password")
         }
 
-        const res = await fetch("https://localhost:5000/auth/login", {
+        const res = await fetch(process.env.REACT_APP_SERVER + "/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -79,12 +79,14 @@ export default function LoginPage(props) {
             </p>
             <ul>
                 <li>
-                    <a href="https://localhost:5000/auth/facebook">
+                    <a href={process.env.REACT_APP_SERVER + "/auth/facebook"}>
                         {" "}Login with facebook{" "}
                     </a>
-                    <a href="https://localhost:5000/auth/google">
+                    <a href={process.env.REACT_APP_SERVER + "/auth/google"}>
                         {" "}Login with google{" "}
                     </a>
+
+
                 </li>
             </ul>
         </section>

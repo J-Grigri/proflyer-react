@@ -28,7 +28,7 @@ export default function EntryPage(props) {
             return alert("Please provide user email and password")
         }
 
-        const res = await fetch("https://localhost:5000/auth/login", {
+        const res = await fetch(process.env.REACT_APP_SERVER + "/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -55,7 +55,7 @@ export default function EntryPage(props) {
         if (password !== password2) {
             alert("Passwords do not match")
         } else {
-            const res = await fetch("https://localhost:5000/users/", {
+            const res = await fetch(process.env.REACT_APP_SERVER + "/users/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -156,7 +156,7 @@ export default function EntryPage(props) {
                             <div className="card-header">
                                 <h3>Login</h3>
                                 <div className="d-flex justify-content-end social_icon">
-                                    <span> <a href="https://localhost:5000/auth/facebook"><i className="fab fa-facebook-square icon"></i></a></span>
+                                    <span> <a href={process.env.REACT_APP_SERVER + "/auth/facebook"}><i className="fab fa-facebook-square icon"></i></a></span>
                                     <span><i className="fab fa-google-plus-square icon"></i></span>
                                 </div>
                             </div>
