@@ -29,45 +29,56 @@ export default function CampCard() {
     }
     //response
     let campsList = camps.map((camp) => {
-
         return (
-            <div className="campSmallOutline col-xl-4">
-                <div className="campSmallTitle">
-                    <h5>{camp.title}</h5>
-                </div>
-                <div className="campSmallVenue">
-                    <h5>{camp.venue}</h5>
-                </div>
-                <div className="campSmallDetails">
-                    <div className="detailItem">
-                        <p><i class="far fa-calendar-plus"></i> Dates</p>
-                        <p>From: {camp.startDate}</p>
-                        <p>To: {camp.endDate}</p>
-                    </div>
-                    <div className="detailItem">
-                        <p><i class="far fa-money-bill-alt"></i>Price</p>
-                        <p>€ {camp.price}</p>
-                    </div>
-                    <div className="detailItem">
-                        <p><i class="far fa-check-circle"></i>Availability</p>
-                        <p>7/9</p>
-                    </div>
-                </div>
+            <div>
+                <div className="campSmallOutline ">
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                        <div>
+                            <div className="campSmallTitle">
+                                <h3>{camp.title}</h3>
+                            </div>
+                            <div className="campSmallVenue">
+                                <h5>{camp.venue}</h5>
+                            </div>
+                        </div>
 
-                <div className="campSmallOrg">
-                    <p><i class="fas fa-user-check"></i>
-                        {camp.organizer}</p>
-                </div>
-                <div class="campSmallLinks" role="group" aria-label="Basic example">
-                    <Link to='/camps/${camp._id}' className="campCardBtn" >See camp</Link>
-                    <Link to="/camps/id" className="campCardBtn" >Coach profile</Link>
+                        <div className="campSmallOrg">
+                            <p className="btt"><i class="fas fa-user-check"></i>Organizer</p>
+                            <p>{camp.organizer.name}</p>
+                        </div>
+                    </div>
+
+
+                    <div className="campSmallDetails">
+                        <div className="detailItem">
+                            <p className="btt"><i class="far fa-calendar-plus"></i> Calendar</p>
+                            <p >From: {camp.startDate}</p>
+                            <p >To: {camp.endDate}</p>
+                        </div>
+                        <div className="detailItem">
+                            <p className="btt"><i class="far fa-money-bill-alt"></i>Price</p>
+                            <p>€ {camp.price}</p>
+                        </div>
+                        <div className="detailItem">
+                            <p className="btt"><i class="far fa-check-circle"></i>Availability</p>
+                            <p>7/9</p>
+                        </div>
+                    </div>
+
+
+                    <div class="campSmallLinks" role="group" aria-label="Basic example">
+                        <Link to={'/camps/' + camp._id} className="campCardBtn" >More</Link>
+                        <Link className="campCardBtn" >Book</Link>
+                        <Link to={'/coaches/' + camp.organizer._id} className="campCardBtn" >Coach profile</Link>
+                    </div>
                 </div>
             </div>
+
         )
     })
 
     return (
-        <div >
+        <div className="row" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
             {campsList}
         </div>
     )

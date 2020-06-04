@@ -60,6 +60,29 @@ export default function Profile(props) {
             return alert("Password change failed")
         }
     }
+    async function coachProfile(e) {
+        e.preventDefault()
+
+        const resp = await fetch(process.env.REACT_APP_SERVER + "/users/coaches/me", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token")
+            },
+            body: JSON.stringify(coachForm)
+        });
+        if (resp.status === 200) {
+            const data = await resp.json()
+            // localStorage.setItem("token", data.data.token)
+            console.log(data)
+            // props.setUser(data.data)
+            console.log("Updated successfully")
+
+        } else {
+            return alert("Profile update failed")
+        }
+
+    }
 
     async function updateProfile(e) {
         e.preventDefault()
@@ -67,9 +90,9 @@ export default function Profile(props) {
         if (formState === "general") {
             body = generalForm
         }
-        else if (formState === "coach") {
-            body = coachForm
-        }
+        // else if (formState === "coach") {
+        //     body = coachForm
+        // }
         else if (formState === "socMedia") {
             body = socialForm
         }
@@ -83,6 +106,7 @@ export default function Profile(props) {
             },
             body: JSON.stringify(body)
         });
+
         if (res.status === 200) {
             const data = await res.json()
             // localStorage.setItem("token", data.data.token)
@@ -130,9 +154,9 @@ export default function Profile(props) {
                 <div className="generalCon mt-3">
                     <form onChange={handleChange} onSubmit={updateProfile} className="generalSec">
                         <div className="fields">
-                            <label for="name" className="inputLabel col col-sm-5">Full name:</label>
+                            <label for="name" className="inputLabel"
+                            >Full name:</label>
                             <input
-                                className="inputBox col col-sm-3"
                                 text="Full Name"
                                 type="text"
                                 name="name"
@@ -140,9 +164,9 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label for="image" className="inputLabel col col-sm-5">Upload profile image</label>
+                            <label for="image" className="inputLabel">Upload profile image</label>
                             <input
-                                className="inputBox col col-sm-4"
+                                className="inputBox"
                                 accept="image/png, image/jpeg"
                                 type="image"
                                 id="upload_form"
@@ -153,9 +177,9 @@ export default function Profile(props) {
 
                         </div>
                         <div className="fields">
-                            <label for="Location" className="inputLabel col col-sm-5">Your location</label>
+                            <label for="Location" className="inputLabel">Your location</label>
                             <input
-                                className="inputBox col col-sm-3"
+                                className="inputBox"
                                 text="Enable your location"
                                 type="text"
                                 name="profile.location"
@@ -165,7 +189,8 @@ export default function Profile(props) {
                         </div>
 
                         <div className="fields" style={{ justifyContent: "center" }}>
-                            <button type="button" className="btn btn-info dropdown-toggle col col-sm-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="profile.skydiveLicence" >{generalForm["profile.skydiveLicence"] || props.user.profile.skydiveLicence}</button>
+                            <label className="inputLabel">Skydive licence</label>
+                            <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="profile.skydiveLicence" >{generalForm["profile.skydiveLicence"] || props.user.profile.skydiveLicence}</button>
                             {/* value={props.user.skydiveLicence} */}
                             <div className="dropdown-menu">
                                 <p className="dropdown-item" onClick={() => {
@@ -211,7 +236,8 @@ export default function Profile(props) {
                         </div>
 
                         <div className="fields" style={{ justifyContent: "center" }}>
-                            <button type="button" className="btn btn-info dropdown-toggle col col-sm-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{generalForm["profile.tunnelHours"] || props.user.profile.tunnelHours}</button>
+                            <label className="inputLabel">Wind tunnel experience</label>
+                            <button type="button" className="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{generalForm["profile.tunnelHours"] || props.user.profile.tunnelHours}</button>
                             <div className="dropdown-menu">
                                 <p className="dropdown-item" onClick={() => {
                                     generalForm["profile.tunnelHours"] = "1 - 10 hours"
@@ -270,9 +296,9 @@ export default function Profile(props) {
         else if (state === "coach") {
             return (
                 <div className="generalCon mt-3">
-                    <form onChange={handleChange} onSubmit={updateProfile} className="generalSec">
+                    <form onChange={handleChange} onSubmit={coachProfile} className="generalSec">
                         <div className="fields">
-                            <label for="Coach bio" className="inputLabel col col-sm-4">Introduction</label>
+                            <label for="Coach bio" className="inputLabel col col-sm-2">Introduction</label>
                             <textarea
                                 className="inputBox col col-sm-4"
                                 type="text"
@@ -283,7 +309,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-4" >Years in sport</label>
+                            <label className="inputLabel col col-sm-2" >Years in sport</label>
                             <input
                                 className="inputBox col col-sm-4"
                                 type="date"
@@ -293,7 +319,7 @@ export default function Profile(props) {
                         </div>
 
                         <div className="fields">
-                            <label className="inputLabel col col-sm-4">Pick the disciplines you are qualified to coach</label>
+                            <label className="inputLabel col col-sm-2">Pick the disciplines you are qualified to coach</label>
                             <br />
                             <input
                                 className="inputBox col col-sm-4"
@@ -304,7 +330,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-4">Relevant work experience</label>
+                            <label className="inputLabel col col-sm-2">Relevant work experience</label>
                             <textarea
                                 className="inputBox col col-sm-4"
                                 type="text"
@@ -315,7 +341,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-6">Certifications</label>
+                            <label className="inputLabel col col-sm-2">Certifications</label>
                             <input
                                 className="inputBox col col-sm-6"
                                 // type="file"
@@ -325,7 +351,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-6">Extras (think of achievments or unique skills)</label>
+                            <label className="inputLabel col col-sm-2">Extras (think of achievments or unique skills)</label>
                             <input
                                 className="inputBox col col-sm-6"
                                 // type="file"
@@ -349,27 +375,28 @@ export default function Profile(props) {
                     <form onChange={handleChange} onSubmit={updateProfile} >
 
                         <div className="fields">
-                            <label className="inputLabel col col-sm-5">Youtube:</label>
+                            <label className="inputLabel ">Youtube:</label>
                             <input
-                                className="inputBox col col-sm-3"
+                                className="inputBox"
                                 type="string"
                                 name="profile.social.youtube"
                                 value={socialForm["profile.social.youtube"] || props.user.profile.social.youtube}
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-5">Instagram:</label>
+                            <label className="inputLabel"
+                            >Instagram:</label>
                             <input
-                                className="inputBox col col-sm-3"
+                                className="inputBox"
                                 type="string"
                                 name="profile.social.instagram"
                                 value={socialForm["profile.social.instagram"] || props.user.profile.social.instagram}
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-5">Facebook:</label>
+                            <label className="inputLabel">Facebook:</label>
                             <input
-                                className="inputBox col col-sm-3"
+                                className="inputBox"
                                 placeholder="Paste a url to your facebook account"
                                 type="string"
                                 name="profile.social.facebook"
@@ -377,9 +404,9 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label className="inputLabel col col-sm-5">Twitter:</label>
+                            <label className="inputLabel">Twitter:</label>
                             <input
-                                className="inputBox col col-sm-3"
+                                className="inputBox"
                                 placeholder="Paste twitter profile url "
                                 type="string"
                                 name="profile.social.twitter"
@@ -402,7 +429,7 @@ export default function Profile(props) {
                 <div>
                     <form onChange={handleChange} onSubmit={updatePW} >
                         <div className="fields">
-                            <label for="passwordCurrent" className="inputLabel col col-sm-6">Current password</label>
+                            <label for="passwordCurrent" className="inputLabel">Current password</label>
                             <input
                                 className="inputBox col col-sm-2"
                                 type="password"
@@ -411,7 +438,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label for="password1" className="inputLabel col col-sm-6">New password</label>
+                            <label for="password1" className="inputLabel">New password</label>
                             <input
                                 className="inputBox col col-sm-2"
                                 type="password"
@@ -419,7 +446,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="fields">
-                            <label for="password2" className="inputLabel col col-sm-6">Repeat new password</label>
+                            <label for="password2" className="inputLabel">Repeat new password</label>
                             <input
                                 className="inputBox col col-sm-2"
                                 type="password"
@@ -427,7 +454,7 @@ export default function Profile(props) {
                             />
                         </div>
                         <div className="campBtn">
-                            <button type="submit" class="btn btn-danger mt-5"> Reset fields</button>
+                            <butßton type="submit" class="btn btn-danger mt-5"> Reset fields</butßton>
                             <button type="submit" class="btn btn-primary mt-5" style={{ marginLeft: "1rem" }}>Update</button>
                         </div>
                     </form>
@@ -440,14 +467,16 @@ export default function Profile(props) {
     return (
         <div class="containerProfile " >
             <h3>Update user profile</h3>
-            <div className="updateContainer col-sm-12 col-xl-12">
+            <div className="updateContainer col-sm-12 col-xl-8">
                 <div className="menuRow">
                     <button onClick={() => setFormState("general")} className="menuBtn">General</button>
                     <button onClick={() => setFormState("coach")} className="menuBtn">Coach profile</button>
                     <button onClick={() => setFormState("socMedia")} className="menuBtn">Connect social media</button>
                     <button onClick={() => setFormState("password")} className="menuBtn">Change password</button>
                 </div>
-                {renderForm(formState)}
+                <div>
+                    {renderForm(formState)}
+                </div>
             </div>
         </div>
     )

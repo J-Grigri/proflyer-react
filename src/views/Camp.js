@@ -12,7 +12,7 @@ export default function Camp(props) {
     let body
     let campsList = [];
     const [formInput, setFormInput] = useState()
-    const [formState, setFormState] = useState("")
+    const [formState, setFormState] = useState("skydiveCamp")
 
     const [skydiveForm, setSkydiveForm] = useState()
     const [tunnelForm, setTunnelForm] = useState()
@@ -69,42 +69,64 @@ export default function Camp(props) {
         //RENDER skydive camp fields
         if (state === "skydiveCamp")
             return (
-                <div >
-                    <form className="campForm" onChange={handleChange} onSubmit={createCamp}>
-                        <div className="form col-md-12">
-                            <div className="form-group col-md-8">
-                                <label for="venue">Wind tunnel name (camp location)</label>
-                                <input type="text" name="venue" placeholder="Venue" />
-                            </div>
-                            <div className="date col-xl-4">
-                                <input
-                                    text="Start date"
-                                    type="date"
-                                    name="startDate">
-                                </input>
-                                <input
-                                    text="End date"
-                                    type="date"
-                                    name="endDate"></input>
-                            </div>
-                            <div className="participants col-xl-7">
-                                <div className="pFielfds">
-                                    <label for="groupSize">Group size (max)</label>
-                                    <input
-                                        text="Group size (max)"
-                                        type="number"
-                                        name="groupSize">
-                                    </input>
+                <div className="myOwnCont">
+
+                    <form className="campForm col-xl-8 col-sm-12" onChange={handleChange} onSubmit={createCamp}>
+                        <div className="form ">
+                            <div className="col-xl-12 col-sm-12 sss">
+                                <div className="col-xl-8 col-sm-8">
+                                    <div className="form-group ">
+                                        <label for="venue">Wind tunnel name (camp location)</label>
+                                        <input type="text" name="venue" placeholder="Venue" />
+                                    </div>
+                                    <div className="date">
+                                        <input
+                                            text="Start date"
+                                            type="date"
+                                            name="startDate">
+                                        </input>
+                                    </div>
+                                    <div className="date">
+                                        <input
+                                            text="End date"
+                                            type="date"
+                                            name="endDate">
+                                        </input>
+                                    </div>
+                                    <div className="participants">
+                                        <div className="pFielfds">
+                                            <label for="groupSize">Group size (max)</label>
+                                            <input
+                                                className="col-xl-6"
+                                                text="Group size (max)"
+                                                type="number"
+                                                name="groupSize">
+                                            </input>
+                                        </div>
+                                        <div className="pFielfds">
+                                            <label for="groupSize">Price per person</label>
+                                            <input
+                                                className="col-xl-6"
+                                                text="Price per person"
+                                                type="number"
+                                                name="price">
+                                            </input>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="pFielfds">
-                                    <label for="groupSize">Price per person</label>
-                                    <input
-                                        text="Price per person"
-                                        type="number"
-                                        name="price">
-                                    </input>
+                                <div className="photoSpot col-xl-4 col-sm-4">
+                                    <div>
+                                        <p style={{ color: "white" }}>Upload camp poster</p>
+                                    </div>
+                                    <div>
+                                        <input
+                                            className="inputBox col col-sm-6"
+                                            type="file"
+                                        />
+                                    </div>
                                 </div>
                             </div>
+
                             <div>
                                 <label for="title">Camp title</label>
                                 <input
@@ -140,14 +162,21 @@ export default function Camp(props) {
 
     return (
         <div id="Camps">
-            <div className="campContainer col col-xl-12" style={{ textAlign: "center" }}>
-                <h2>Create a new camp</h2>
-                <ButtonGroup className="mb-2">
+            <div style={{ textAlign: "center" }}>
+
+                <div >
+                    <h2 style={{
+                        color: "#b89517",
+                        margin: "0"
+                    }}>Organize a new camp</h2>
+                </div>
+                <div>
+                    {renderForm(formState)}
+                </div>
+                {/* <ButtonGroup className="mb-2">
                     <Button onClick={() => setFormState("skydiveCamp")} >Skydive</Button>
                     <Button onClick={() => setFormState("tunnelCamp")} >Wind tunnel</Button>
-                </ButtonGroup>
-                {renderForm(formState)}
-
+                </ButtonGroup> */}
             </div>
         </div>
     )

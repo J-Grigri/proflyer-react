@@ -2,6 +2,10 @@
   background-color: rgba(0, 0, 0, 0.75);
   color: #ffff;
   margin: 1rem;
+  border: 2px solid #b89517;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
 }
 .campSmallTitle {
   display: flex;
@@ -9,24 +13,23 @@
   color: #b89517;
   font-style: italic;
   font-size: x-large;
-  font-weight: 800;
+  font-weight: 400;
+  padding: 1rem;
 }
 .campSmallVenue {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border: 1px solid yellow;
 }
 .campSmallDetails {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border: 1px solid red;
 }
 .campSmallLinks {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 /* .campCardBtn {
   background-color: none;
@@ -36,11 +39,12 @@
   display: inline-block;
   color: #b89517;
   font-size: medium;
-  border: none;
+  border: 1px solid#b89517;
   cursor: pointer;
   transition: opacity 0.2s ease-in;
   outline: none;
-  margin-bottom: 1rem;
+  margin-right: 2em;
+  padding: 0.5rem;
   border-radius: 5px;
 }
 .campSmallOrg {
@@ -48,7 +52,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 .detailItem {
   text-align: center;
+}
+.btt {
+  color: #17a2b8;
 }

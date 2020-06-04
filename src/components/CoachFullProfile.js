@@ -1,12 +1,39 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import '../coachFullProfile.css'
 
 export default function CoachFullProfile(props) {
-    console.log("khoa", props.user)
+
+    // const [coach, setCoach] = useState(null)
+    // console.log(coach)
+
+    // // get id from params
+    // const { coachId } = useParams()
+
+    // useEffect(() => {
+    //     fetchSingleCoach()
+    // }, [])
+
+    // const fetchSingleCoach = async () => {
+    //     const res = await fetch(process.env.REACT_APP_SERVER + "/camps/" + coachId, {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: "Bearer " + localStorage.getItem("token")
+    //         }
+    //     })
+    //     if (res.status === 200) {
+    //         const body = await res.json()
+    //         console.log("body", body)
+    //         setCamp(body.data)
+    //     } else {
+    //         alert("No coaches to show")
+    //     }
+    // }
+
+    // if (!coach) return <h1>Loading...</h1>
 
     return (
-        <div className="col-xl-12 campExtended">
+        <div className="col-xl-6 campExtended">
             <h5 className="campCategoryBox">Coach Full profile</h5>
             <div className="verticalExtended col-xl-12 " >
                 <div className="coachProfileTop">

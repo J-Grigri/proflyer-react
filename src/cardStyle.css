@@ -79,6 +79,7 @@
   background-color: rgba(0, 0, 0, 0.75);
   box-shadow: 0 10px 10px;
   border: 2px solid #b89517;
+  margin: 2rem;
 }
 .campInfoElem {
   display: flex;
@@ -188,5 +189,5 @@
   font-weight: 400;
   font-size: medium;
   padding: 1rem;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 }

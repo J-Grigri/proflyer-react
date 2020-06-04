@@ -30,7 +30,7 @@ export default function Header(props) {
     return (
         <div className="kheader">
             <header>
-                <div id="mynav" className="navbar navbar-expand-lg fixed-top ">
+                <div id="mynav" className="navbar navbar-expand-lg fixed-top">
                     <nav className="topRow">
                         <Link to="/" className="navbar-brand  font-weight-bold"><i className="fas fa-jedi"></i>ProFlyer</Link>
                         <button
@@ -63,7 +63,7 @@ export default function Header(props) {
 
                                 <li class="nav-item"><Link to="/coaches" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}> Coaches</Link></li>
 
-                                <li class="nav-item"><Link to="/camps" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Camps</Link></li>
+                                <li class="nav-item"><Link to="/camps" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Browse Camps</Link></li>
 
                                 <li class="nav-item"> {!props.user ?
                                     <span></span>
@@ -74,7 +74,7 @@ export default function Header(props) {
                                 <li class="nav-item"> {!props.user ?
                                     <Link to="/register" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Register</Link>
                                     :
-                                    <Link to="/profile" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>{props.user.name}</Link>}
+                                    <Link to="/profile" class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>{props.user.name} profile</Link>}
                                 </li>
                                 <li class="nav-item">
                                     {!props.user ?

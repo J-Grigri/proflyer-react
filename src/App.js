@@ -116,7 +116,7 @@ function App(props) {
               <Protected exact path="/coaches" user={user} setUser={setUser} component={CoachCard} />
 
               <Protected exact path="/camps/create" user={user} setUser={setUser} component={Camp} />
-              <Protected exact path="/camps/id" user={user} setUser={setUser} component={CampFullCard} />
+              <Protected exact path="/camps/:campId" user={user} setUser={setUser} component={CampFullCard} />
               <Protected exact path="/camps" user={user} setUser={setUser} component={CampCard} />
 
               <Nomore exact path="/register" user={user} setUser={setUser} page="register" component={EntryPage} />
