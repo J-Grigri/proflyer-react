@@ -24,6 +24,9 @@
 
 .jsection {
   margin-top: 6rem;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
 }
 .kfooter {
   flex-shrink: 0;

@@ -67,9 +67,9 @@ export default function CampCard() {
 
 
                     <div class="campSmallLinks" role="group" aria-label="Basic example">
-                        <Link to={'/camps/' + camp._id} className="campCardBtn" >More</Link>
-                        <Link className="campCardBtn" >Book</Link>
-                        <Link to={'/coaches/' + camp.organizer._id} className="campCardBtn" >Coach profile</Link>
+                        <Link to={'/camps/' + camp._id} className="campCardBtnYellow" >More</Link>
+                        <Link className="campCardBtnYellow" >Book</Link>
+                        <Link to={'/coaches/profile/' + camp.organizer._id} className="campCardBtnYellow" >Coach profile</Link>
                     </div>
                 </div>
             </div>

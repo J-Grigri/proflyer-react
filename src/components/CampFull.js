@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
 import '../cardStyle.css'
+import {
+    CircleLoader
+} from 'react-spinners'
 
 export default function Camp(props) {
     const [camp, setCamp] = useState(null)
@@ -27,68 +30,85 @@ export default function Camp(props) {
             console.log("body", body)
             setCamp(body.data)
         } else {
-            alert("No coaches to show")
+            alert("No coaches to show from campfull")
         }
     }
-
-    if (!camp) return <h1>Loading...</h1>
+    console.log(camp)
+    if (!camp) {
+        return (
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh"
+            }}  >
+                <CircleLoader />
+            </div>
+        )
+    }
 
     return (
-        <div className="col-xl-8 campExtended">
-            <h5 className="campCategoryBox">Wind tunnel camp</h5>
-            <div className="verticalExtended col-xl-12 " >
-                <h2 className="campTitle"> {camp.title}</h2>
+        <div >
+            <div className="campExtended col-md-5">
+
                 <div className="campInfoElem col-xl-12">
-                    <div className="organizerExtended col-xl-6">
-                        <div className="campSubSec">
-                            <h4 style={{ margin: "0" }}>Details</h4>
+                    <div className="organizerExtended col-xl-5">
+                        <h3 className="campSubSec">Title</h3>
+                        <p>{camp.title}</p>
+                    </div>
+                    <div className="organizerExtended col-xl-7">
+                        <h3 className="campSubSec">About</h3>
+                        <p>{camp.description}</p>
+                    </div>
+                </div>
+                <div className="campInfoElem col-xl-12">
+                    <div className="organizerExtended col-xl-5 ">
+                        <h3 className="campSubSec">Details</h3>
+                        <div className="campSecTitle">
+                            <h4 className="campDetailItem">Location:</h4>
+                            <p>{camp.venue} </p>
                         </div>
                         <div className="campSecTitle">
-                            <p className="campDetailItem">Location:</p>
-                            <p>{camp.venue}</p>
+                            <h4 className="campDetailItem">Starts:</h4>
+                            <p>{camp.startDate}</p><br></br>
                         </div>
                         <div className="campSecTitle">
-                            <p className="campDetailItem">Date:</p>
-                            <p>From: {camp.startDate}</p>
-                            <p>To: {camp.endDate}</p>
+                            <h4 className="campDetailItem">Ends:</h4>
+                            <p>{camp.endDate}</p>
                         </div>
                         <div className="campSecTitle">
-                            <p className="campDetailItem"> Price:</p>
+                            <h4 className="campDetailItem"> Price:</h4>
                             <p>{camp.price}</p>
                         </div>
                         <div className="campSecTitle">
-                            <p className="campDetailItem">Availability:</p>
+                            <h4 className="campDetailItem">Availability:</h4>
                             <p>{camp.availability}</p>
                         </div>
                     </div>
-                    <div className="organizerExtended col-xl-6">
-                        <div className="campSubSec">
-                            <h4 style={{ margin: "0" }}>Organizer</h4>
-                        </div>
+                    <div className="organizerExtended col-xl-7">
+                        <h3 className="campSubSec">Organizer</h3>
                         <div>
-                            <h5 className="organizerName">{camp.organizer.name}</h5>
+                            <h4 className="campDetailName">{camp.organizer.name}</h4>
                         </div>
-                        <div>
-                            <p className="organizerBio">{camp.organizer.bio}</p>
+                        <div >
+                            <h4 className="campDetailItem">About {camp.organizer.name} :</h4>
+                            <p>{camp.organizer.coach.bio}Rows are wrappers for columns. Each column has horizontal padding (called a gutter) for controlling the space between them. This padding is then counteracted on the rows with negative margins. This way, all the content in your columns is visually aligned down the left side.</p>
                         </div>
-                        <Link to={'/coaches/profile/' + camp.organizer.id} className="campCardBtn">See coach profile</Link>
                     </div>
                 </div>
-                <div className="campDesc col-xl-12">
-                    <div className="descTitle">
-                        <h3 style={{ margin: "0", color: "#17a2b8" }}>Description</h3>
-                    </div>
-                    <div className="descBox">
-                        <p style={{ color: "#ffff", padding: "0.5rem", textAlign: "justify" }}>{camp.description}.</p>
-                    </div>
+                <div className="row">
+                    <Link to={'/coaches/profile/' + camp.organizer.id} className="campCardBtnYellow">Edit camp</Link>
+                    <Link to={'/coaches/profile/' + camp.organizer.id} className="campCardBtnYellow">Coach profile</Link>
                 </div>
-                <div className="campBtn">
+
+                {/* <div className="campBtn">
                     <button type="submit" class="btn btn-primary" style={{ marginLeft: "1rem" }}>Sign me up!</button>
+                    <Link to={'/camps/update/' + camp.id} className="campCardBtnYellow">Edit</Link>
                 </div>
                 <div class="campCommentMenu" role="group" aria-label="Basic example">
                     <Link to="/camps/id" className="commentItemBtn">Comments</Link>
                     <Link to="/camps/id" className="commentItemBtn">Particinat discussion</Link>
-                </div>
+                </div> */}
             </div>
         </div>
     )

@@ -74,7 +74,6 @@ export default function Profile(props) {
         if (resp.status === 200) {
             const data = await resp.json()
             // localStorage.setItem("token", data.data.token)
-            console.log(data)
             // props.setUser(data.data)
             console.log("Updated successfully")
 
@@ -466,7 +465,7 @@ export default function Profile(props) {
     //RENDER PROFILE PAGE
     return (
         <div class="containerProfile " >
-            <h3>Update user profile</h3>
+            <h3>Update profile</h3>
             <div className="updateContainer col-sm-12 col-xl-8">
                 <div className="menuRow">
                     <button onClick={() => setFormState("general")} className="menuBtn">General</button>

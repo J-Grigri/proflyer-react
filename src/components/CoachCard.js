@@ -33,23 +33,28 @@ export default function Coaches(props) {
     let coachesList = coaches.map((coach) => {
 
         return (
-            <div className="coachCardBase" style={{ width: "18rem" }}>
-                <img src="https://a.calameoassets.com/1651941/picture.jpg?_u=120908181623" className="card-img-top" alt="..." />
+            <div className="coachCardBase col-sm-3 col-xl-2" >
+                <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" className="card-img-top" alt="..." />
                 <div className="coachCard">
                     <div className="titleBc">
-                        <h5 className="coachName">{props.user.name}</h5>
+                        <h5 className="coachName">{coach.name}</h5>
                     </div>
                 </div>
                 <div>
                     {/* <p className="card-text">{props.user.coach.bio}</p> */}
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+                    <p className="card-text">{coach.coach.bio}</p>
                 </div>
                 <div className="list-group list-group-flush">
-                    <div className="coachDisc">Disciplines</div>
-                    <div className="coachRating">Coach rating:</div>
+                    <div className="coachDisc">
+                        <p>Disciplines</p>
+                        <p>{coach.coach.disciplines}</p>
+                    </div>
+                    <div className="coachRating">
+                        Coach rating: 4.5
+                    </div>
                 </div>
                 <div className="card-link">
-                    <span href="#">Full profile</span>
+                    <Link to={'/coaches/profile/' + coach._id} className="campCardBtn" >Full profile</Link>
                 </div>
             </div>
         )
@@ -57,7 +62,7 @@ export default function Coaches(props) {
 
 
     return (
-        <div>
+        <div className="row" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
             {coachesList}
         </div>
     )

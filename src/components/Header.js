@@ -6,8 +6,6 @@ import "../navbar.css"
 export default function Header(props) {
     const history = useHistory();
 
-    console.log("props.user in Header", props.user)
-
     const handleLogout = async () => {
 
         try {
@@ -16,7 +14,7 @@ export default function Header(props) {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
             });
-            console.log("fetch", req)
+
             if (req.status === 204) {
                 props.setUser(null);
                 localStorage.removeItem("token");
@@ -80,7 +78,7 @@ export default function Header(props) {
                                     {!props.user ?
                                         <Link to="/login" class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Login</Link>
                                         :
-                                        <Link onClick={handleLogout} class="nav-link font-weight-bold" style={{ fontSize: "medium" }} >Logout</Link>}
+                                        <Link onClick={handleLogout} class="nav-link font-weight-bold" style={{ fontSize: "medium" }}>Logout</Link>}
                                 </li>
                             </ul>
                         </div>

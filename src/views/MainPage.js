@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom'
 
 const ar = [{ id: 1, cat: "Jerry" }, { id: 2, cat: "Tom" }, { id: 3, cat: "Bull" }]
 export default function MainPage(props) {
-    console.log("===", props.user)
     const history = useHistory()
     const [cats, setCats] = useState(ar)
     const [camp, setCamp] = useState({ id: 1, name: "Hell", cats: [] })
@@ -17,7 +16,6 @@ export default function MainPage(props) {
         setCamp({ ...camp, cats: temp })
         setCats([...cats.filter(e => e.id !== id)])
     }
-    console.log(camp)
     return (
         <div >
             Hello WTF {props.user && props.user.name}

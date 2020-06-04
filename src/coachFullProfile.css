@@ -9,11 +9,7 @@
   flex-direction: column;
   padding: 0.5rem;
 }
-.coachName {
-  display: flex;
-  justify-content: center;
-  color: #17a2b8;
-}
+
 .coachBio {
   display: flex;
   justify-content: center;
@@ -38,16 +34,14 @@
 .coachProfileDetails {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  color: white;
+  justify-content: space-between;
 }
 .coachProfileDetailItem {
   display: flex;
   flex-direction: column;
-  align-items: space-around;
-  border: 1px solid red;
+  align-items: space-between;
   text-align: center;
-  padding: 0;
+  padding: 1rem;
 }
 .coachProfileDetailItem {
   color: #b89517;

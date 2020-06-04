@@ -11,7 +11,7 @@ export default function Camp(props) {
 
     let body
     let campsList = [];
-    const [formInput, setFormInput] = useState()
+    const [formInput, setFormInput] = useState({})
     const [formState, setFormState] = useState("skydiveCamp")
 
     const [skydiveForm, setSkydiveForm] = useState()
@@ -61,8 +61,12 @@ export default function Camp(props) {
         }
     }
 
+    function resetForm() {
+        setSkydiveForm({})
+        document.getElementById("khoa").reset()
+    }
 
-    console.log("form input", formInput)
+    console.log(skydiveForm)
 
     const renderForm = (state) => {
 
@@ -71,7 +75,7 @@ export default function Camp(props) {
             return (
                 <div className="myOwnCont">
 
-                    <form className="campForm col-xl-8 col-sm-12" onChange={handleChange} onSubmit={createCamp}>
+                    <form id="khoa" className="campForm col-xl-8 col-sm-12" onChange={handleChange} onSubmit={createCamp}>
                         <div className="form ">
                             <div className="col-xl-12 col-sm-12 sss">
                                 <div className="col-xl-8 col-sm-8">
@@ -148,7 +152,7 @@ export default function Camp(props) {
                             </div>
                         </div>
                         <div className="campBtn">
-                            <button type="submit" class="btn btn-danger "> Reset fields</button>
+                            <button class="btn btn-danger" type="button" onClick={() => resetForm()}> Reset fieldssss</button>
                             <button type="submit" class="btn btn-primary" style={{ marginLeft: "1rem" }}>Announce camp</button>
                         </div>
                     </form>

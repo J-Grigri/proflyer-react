@@ -15,10 +15,10 @@ import CoachCard from "./components/CoachCard"
 import CampFullCard from "./components/CampFull"
 import CampCard from "./components/CampCard"
 import Camp from "./views/Camp"
+import UpdateCamp from './views/UpdateCamp'
 import Profile from "./views/Profile"
 import ChangePassword from './views/changePassword';
 import CoachFullProfile from "./components/CoachFullProfile"
-
 
 function App(props) {
   const history = useHistory()
@@ -88,7 +88,6 @@ function App(props) {
   };
 
   if (!loaded) {
-    console.log("user", user)
     return (
       <div style={{
         display: "flex",
@@ -104,17 +103,17 @@ function App(props) {
   return (
     <div>
       <Header user={user} setUser={setUser} formInput={formInput} setFormInput={setFormInput} />
-
       <div className="mainSection">
         <section className="container-fluid footerPos">
-          <div className="jsection">
+          <div className="jsection ">
             <Switch>
               <Route exact path="/" render={() => <Landing user={user} />} />
               <Route exact path="/main" render={() => <MainPage user={user} />} />
 
-              <Protected exact path="/coaches/profile" user={user} setUser={setUser} component={CoachFullProfile} />
+              <Protected exact path="/coaches/profile/:coachId" user={user} setUser={setUser} component={CoachFullProfile} />
               <Protected exact path="/coaches" user={user} setUser={setUser} component={CoachCard} />
 
+              <Protected exact path="/camps/update/:campId" user={user} setUser={setUser} component={UpdateCamp} />
               <Protected exact path="/camps/create" user={user} setUser={setUser} component={Camp} />
               <Protected exact path="/camps/:campId" user={user} setUser={setUser} component={CampFullCard} />
               <Protected exact path="/camps" user={user} setUser={setUser} component={CampCard} />

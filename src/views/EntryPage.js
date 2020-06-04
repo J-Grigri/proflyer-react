@@ -38,7 +38,6 @@ export default function EntryPage(props) {
 
         if (res.status === 200 || 201) {
             const data = await res.json()
-            console.log("=-=-=-=-=", data)
 
             localStorage.setItem("token", data.data.token)
             await props.setUser(data.data.user)

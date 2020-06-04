@@ -37,15 +37,27 @@
 } */
 .campCardBtn {
   display: inline-block;
-  color: #b89517;
-  font-size: medium;
-  border: 1px solid#b89517;
+  color: #343a40;
+  font-size: large;
+  width: 100%;
   cursor: pointer;
   transition: opacity 0.2s ease-in;
   outline: none;
-  margin-right: 2em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
   padding: 0.5rem;
   border-radius: 5px;
+}
+.campCardBtnYellow {
+  color: gold;
+  border: 0.5px solid gold;
+  font-size: medium;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+.campCardBtnYellow:hover {
+  color: white;
+  border: 0.5px solid white;
 }
 .campSmallOrg {
   display: flex;
