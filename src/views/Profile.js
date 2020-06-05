@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Button, ButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap'
+import { useHistory } from "react-router-dom";
 require("dotenv").config({ path: "../env" });
 
 export default function Profile(props) {
     let body;
+    const history = useHistory()
 
     const [generalForm, setGeneralForm] = useState({})
     const [coachForm, setCoachForm] = useState({})
@@ -76,6 +78,7 @@ export default function Profile(props) {
             // localStorage.setItem("token", data.data.token)
             // props.setUser(data.data)
             console.log("Updated successfully")
+            history.push("/main/")
 
         } else {
             return alert("Profile update failed")
@@ -110,6 +113,7 @@ export default function Profile(props) {
             const data = await res.json()
             // localStorage.setItem("token", data.data.token)
             props.setUser(data.data)
+            history.push("/camps")
             console.log("Updated successfully")
 
         } else {
@@ -282,7 +286,7 @@ export default function Profile(props) {
                         </div>
                         <div className="campBtn">
                             <button type="submit" className="btn btn-danger mt-5 "> Reset fields</button>
-                            <button type="submit" className="btn btn-primary mt-5" style={{ marginLeft: "1rem" }}>Updateee</button>
+                            <button type="submit" className="btn btn-primary mt-5" style={{ marginLeft: "1rem" }}>Update</button>
                         </div>
 
                     </form>

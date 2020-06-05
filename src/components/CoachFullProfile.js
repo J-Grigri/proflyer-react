@@ -45,6 +45,7 @@ export default function CoachFullProfile(props) {
             </div>
         )
     }
+    console.log("mmmm", coach)
 
     return (
         <div className="campExtended col-md-5">

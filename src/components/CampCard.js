@@ -31,7 +31,7 @@ export default function CampCard() {
     let campsList = camps.map((camp) => {
         return (
             <div>
-                <div className="campSmallOutline ">
+                <div className="campSmallOutline">
                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
                         <div>
                             <div className="campSmallTitle">
