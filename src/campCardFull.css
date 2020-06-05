@@ -31,10 +31,7 @@
   flex-direction: row;
   justify-content: center;
 }
-/* .campCardBtn {
-  background-color: none;
-  outline: none;
-} */
+
 .campCardBtn {
   display: inline-block;
   color: #343a40;
@@ -48,12 +45,25 @@
   padding: 0.5rem;
   border-radius: 5px;
 }
+.campCardBtn:hover {
+  color: #343a40;
+}
 .campCardBtnYellow {
   color: gold;
   border: 0.5px solid gold;
   font-size: medium;
   margin: 0.5rem;
   padding: 0.3rem;
+}
+.campCardBtnMain {
+  color: #343a40;
+  border: 0.5px solid #343a40;
+  font-size: medium;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
+.campCardBtnMain:hover {
+  color: #17a2b8;
 }
 .campCardBtnYellow:hover {
   color: white;

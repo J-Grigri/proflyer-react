@@ -5,12 +5,7 @@
   margin: 1rem;
   padding: 0;
 }
-.coachCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+
 .titleBc {
   background-color: #b89517;
   width: 100%;
@@ -26,7 +21,7 @@
   color: #343a40;
   font-weight: 500;
   padding: 0;
-  margin-top: 10px;
+  margin-bottom: 0;
   letter-spacing: 1px;
   cursor: pointer;
 }
@@ -43,8 +38,15 @@
 }
 .coachDisc {
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-items: center;
+  flex-direction: row;
   color: #ffff;
+}
+.darkBase {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 1rem;
+  padding-bottom: 0;
 }
 .coachRating {
   text-align: center;
@@ -94,6 +96,7 @@
   display: flex;
   flex-direction: row;
   padding: 0;
+  margin-bottom: 1rem;
 }
 .campCategoryBox {
   color: #ffff;
@@ -112,8 +115,8 @@
 .campSubSec {
   color: #e9bb15;
   font-size: x-large;
-  border-bottom: 1px solid#e9bb15;
-  width: 35%;
+  text-align: center;
+  /* border-bottom: 1px solid #e9bb15; */
 }
 .detailExtended {
   display: flex;
@@ -188,4 +191,31 @@
   font-size: medium;
   padding: 1rem;
   /* margin-bottom: 3rem; */
+}
+
+/* camp small card */
+.campSmallN {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 10px 10px;
+  border: 2px solid #b89517;
+  padding: 1rem;
+}
+.campSmallrow {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+.campSmallcol {
+  display: block;
+  flex-direction: column;
+  color: #ffff;
+  border: 1px solid red;
+}
+.campSmalltitle {
+  color: #e9bb15;
+  font-size: large;
+  /* border-bottom: 1px solid #e9bb15; */
 }

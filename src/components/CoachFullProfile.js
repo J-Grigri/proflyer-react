@@ -47,75 +47,79 @@ export default function CoachFullProfile(props) {
     }
 
     return (
-        <div className="col-xl-6 col-sm-8 campExtended">
-            <h5 className="campCategoryBox">Coach Full profile</h5>
-            <div className="verticalExtended col-xl-8 " >
-                <div className="coachProfileTop">
-                    <div className="card-img-top col-xl-5">
-                        <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="..." />
+        <div className="campExtended col-md-5">
+            <div className="campInfoElem col-xl-12">
+                <div className="col-md-8">
+                    <h3 className="campSubSec">Coach profile</h3>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem">Name:</h4>
+                        <p>{coach.name}</p>
                     </div>
-                    <div className="coachProfileTopR col-xl-7">
-                        <h5 className="coachName">{coach.name}</h5>
-                        <p className="coachBio">{coach.coach.bio}.</p>
-                        <div className="coachSocMedia">
-                            <i height="100" class="fab fa-instagram fa-2x"></i>
-                            <i class="fab fa-facebook-square fa-2x"></i>
-                            <i class="fab fa-youtube fa-2x"></i>
-                            <i class="fab fa-twitter-square fa-2x"></i>
-                        </div>
+                    <div className="campSecTitle ">
+                        <h4 className="campDetailItem">Intro:</h4>
+                        <p>{coach.coach.bio}</p>
                     </div>
-                </div>
-                <div className="profileSec col-xl-12">
-                    <div className="profSecTitle">
-                        <h3 style={{ margin: "0", color: "#17a2b8" }}>Details</h3>
-                    </div>
-                    <div className="coachProfileDetails">
-                        <div className="coachProfileDetailItem" >
-                            <p className="profileDetailItem">Coaching</p>
-                            skydive
-                            wind tunnel
-                        </div>
-                        <div className="coachProfileDetailItem">
-                            <p className="profileDetailItem">Based in</p>
-                            <p>{coach.profile.location}</p>
-                        </div>
-                        <div className="coachProfileDetailItem">
-                            <p className="profileDetailItem">Disciplines</p>
-                            <p>{coach.profile.disciplines}</p>
-                        </div>
-                        <div className="coachProfileDetailItem">
-                            <p className="profileDetailItem">Experience</p>
-                            <p>Skydive licence: {coach.profile.skydiveLicence}</p>
-                            <p>Tunnel hours: {coach.profile.tunnelHours}</p>
-
-                        </div>
-                        <div className="coachProfileDetailItem">
-                            <p className="profileDetailItem">In sport since</p>
-                            <p>{coach.profile.inSportSince}</p>
-                        </div>
+                    <div className="coachSocMedia">
+                        <i height="100" class="fab fa-instagram fa-2x"></i>
+                        <i class="fab fa-facebook-square fa-2x"></i>
+                        <i class="fab fa-youtube fa-2x"></i>
+                        <i class="fab fa-twitter-square fa-2x"></i>
                     </div>
                 </div>
-                <div className="profileSec col-xl-12">
-                    <div className="profSecTitle">
-                        <h3 style={{ margin: "0", color: "#17a2b8" }}>Coaching experience</h3>
+                <div className="col-md-4">
+                    <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="..." />
+                </div>
+            </div>
+            <div className="campInfoElem col-xl-12">
+                <div className="organizerExtended col-xl-6 ">
+                    <h3 className="campSubSec">Details</h3>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem">Coaching:</h4>
+                        <p>Skydive</p>
                     </div>
-                    <div className="">
-                        <p style={{ color: "#ffff", padding: "0.5rem", }}>{coach.coach.experience} </p>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem">Disciplines:</h4>
+                        <p>{coach.profile.disciplines}</p>
+                    </div>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem"> Based in:</h4>
+                        <p>{coach.profile.location}</p>
                     </div>
                 </div>
-                <div className=" certAwardSec col-xl-10">
-                    <div className=" col-xl-6">
-                        <h3 style={{ margin: "0", color: "#17a2b8" }}>Certifications</h3>
-                        <p style={{ color: "#ffff", padding: "0.5rem", textAlign: "justify" }}>{coach.coach.certifications} </p>
+                <div className="organizerExtended col-xl-6">
+                    <h3 className="campSubSec">Experience</h3>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem">Skydive licence:</h4>
+                        <p>{coach.profile.skydiveLicence}</p>
                     </div>
-                    <div className=" col-xl-6">
-                        <h3 style={{ margin: "0", color: "#17a2b8" }}>Awards</h3>
-                        <p style={{ color: "#ffff", padding: "0.5rem", textAlign: "justify" }}>{coach.coach.awards} </p>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem">Wind tunnel:</h4>
+                        <p>{coach.profile.tunnelHours}</p>
+                    </div>
+                    <div className="campSecTitle">
+                        <h4 className="campDetailItem">Flying since:</h4>
+                        <p>{coach.profile.inSportSince}</p>
                     </div>
                 </div>
             </div>
-            <div class="campCommentMenu" role="group" aria-label="Basic example">
-                <Link className="commentItemBtn">Coach reviews</Link>
+            <div className="organizerExtended col-xl-12">
+                <h3 className="campSubSec">Extras</h3>
+                <div className="campSecTitle">
+                    <h4 className="campDetailItem">Coaching experience:</h4>
+                    <p>{coach.coach.experience}</p>
+                </div>
+                <div className="campSecTitle">
+                    <h4 className="campDetailItem">Certifications:</h4>
+                    <p>{coach.coach.certifications} </p>
+                </div>
+                <div className="campSecTitle">
+                    <h4 className="campDetailItem">Awards:</h4>
+                    <p>{coach.coach.awards}</p>
+                </div>
+            </div>
+            <div className="row">
+                <Link to={'/camps/'} className="campCardBtnYellow">Check out {coach.name} camps</Link>
+
             </div>
         </div>
     )

@@ -154,10 +154,11 @@ export default function EntryPage(props) {
                         <div className="card">
                             <div className="card-header">
                                 <h3>Login</h3>
-                                <div className="d-flex justify-content-end social_icon">
-                                    <span> <a href={process.env.REACT_APP_SERVER + "/auth/facebook"}><i className="fab fa-facebook-square icon"></i></a></span>
-                                    <span><i className="fab fa-google-plus-square icon"></i></span>
+                                <div>
+                                    <a href={process.env.REACT_APP_SERVER + "/auth/facebook"}><i style={{ color: "white", }} class="fab fa-facebook-square"></i></a>
+                                    <a href={process.env.REACT_APP_SERVER + "/auth/google"}><i style={{ color: "white" }} class="fab fa-google"></i></a>
                                 </div>
+
                             </div>
                             <div className="card-body">
 

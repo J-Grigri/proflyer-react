@@ -25,11 +25,15 @@
 }
 .coachSocMedia {
   display: flex;
+  color: white;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   text-align: center;
   margin: 0.5rem;
+}
+i {
+  cursor: pointer;
 }
 .coachProfileDetails {
   display: flex;

@@ -50,7 +50,6 @@ export default function Camp(props) {
     return (
         <div >
             <div className="campExtended col-md-5">
-
                 <div className="campInfoElem col-xl-12">
                     <div className="organizerExtended col-xl-5">
                         <h3 className="campSubSec">Title</h3>
@@ -92,23 +91,14 @@ export default function Camp(props) {
                         </div>
                         <div >
                             <h4 className="campDetailItem">About {camp.organizer.name} :</h4>
-                            <p>{camp.organizer.coach.bio}Rows are wrappers for columns. Each column has horizontal padding (called a gutter) for controlling the space between them. This padding is then counteracted on the rows with negative margins. This way, all the content in your columns is visually aligned down the left side.</p>
+                            <p>{camp.organizer.coach.bio}</p>
                         </div>
                     </div>
                 </div>
                 <div className="row">
-                    <Link to={'/coaches/profile/' + camp.organizer.id} className="campCardBtnYellow">Edit camp</Link>
+                    <Link to={'/camps/update/' + camp.id} className="campCardBtnYellow">Edit camp</Link>
                     <Link to={'/coaches/profile/' + camp.organizer.id} className="campCardBtnYellow">Coach profile</Link>
                 </div>
-
-                {/* <div className="campBtn">
-                    <button type="submit" class="btn btn-primary" style={{ marginLeft: "1rem" }}>Sign me up!</button>
-                    <Link to={'/camps/update/' + camp.id} className="campCardBtnYellow">Edit</Link>
-                </div>
-                <div class="campCommentMenu" role="group" aria-label="Basic example">
-                    <Link to="/camps/id" className="commentItemBtn">Comments</Link>
-                    <Link to="/camps/id" className="commentItemBtn">Particinat discussion</Link>
-                </div> */}
             </div>
         </div>
     )

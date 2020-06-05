@@ -74,12 +74,27 @@ export default function CampCard() {
                 </div>
             </div>
 
+
         )
     })
 
     return (
-        <div className="row" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+        <div className="row" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}>
             {campsList}
         </div>
     )
 }
+
+// <div className="campSmallN col-md-3">
+//                 <div className="campSmallrow">
+//                     <div className="campSmallcol col-xl-8">
+//                         <h3 className="campSmalltitle">Title</h3>
+//                         <p>{camp.title}</p>
+//                     </div>
+//                     <div className="campSmallcol col-xl-4">
+//                         <h3 className="campSmalltitle">Details</h3>
+//                         <p>{camp.title}</p>
+//                     </div>
+//                 </div>
+
+//             </div>
